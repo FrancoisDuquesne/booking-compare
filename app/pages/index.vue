@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { h } from "vue";
-import type { TableColumn } from "@nuxt/ui";
 import { computed, onMounted, ref } from "#imports";
-import { UButton } from "#components";
-import type { Estate } from "~/types/estate";
 import { useCurrentUser } from "~/composables/useCurrentUser";
 import { useEstates } from "~/composables/useEstates";
 import { useShareableUrl } from "~/composables/useShareableUrl";
@@ -24,7 +20,6 @@ const {
   newNote,
   showDeleteModal,
   showNotesModal,
-  columnPinning,
   allParticipants,
   currentUserVotes,
   hasUserVotedForEstate,
@@ -97,106 +92,6 @@ function handleViewModeChange(mode: "grid" | "table") {
   viewMode.value = mode;
 }
 
-const columns: TableColumn<Estate>[] = [
-  {
-    accessorKey: "image",
-    header: "Image",
-    cell: ({ row }) =>
-      h("img", {
-        src: row.original.image,
-        alt: row.original.name,
-        class: "max-w-44 rounded-lg h-28 object-cover",
-        loading: "lazy",
-      }),
-  },
-  { accessorKey: "name", header: "Name" },
-  { accessorKey: "price", header: "Price" },
-  { accessorKey: "rating", header: "Rating" },
-  { accessorKey: "location", header: "Location" },
-  {
-    accessorKey: "votes",
-    header: "Votes",
-    cell: ({ row }) => {
-      const estateVotes = getVotesForEstate(row.original.url);
-      return h("div", { class: "flex flex-col items-center" }, [
-        h(
-          "span",
-          { class: "text-lg font-bold text-primary" },
-          estateVotes.length.toString(),
-        ),
-        h("span", { class: "text-xs text-muted" }, "votes"),
-      ]);
-    },
-  },
-  {
-    accessorKey: "notes",
-    header: "Notes",
-    cell: ({ row }) => {
-      const estateNotes = getNotesForEstate(row.original.url);
-      return h("div", { class: "flex flex-col items-center" }, [
-        h(
-          "span",
-          { class: "text-lg font-bold text-blue-600" },
-          estateNotes.length.toString(),
-        ),
-        h("span", { class: "text-xs text-muted" }, "notes"),
-      ]);
-    },
-  },
-  {
-    accessorKey: "actions",
-    header: "Actions",
-    cell: ({ row }) => {
-      const estate = row.original;
-      const hasVoted = hasUserVotedForEstate.value(estate.url);
-
-      return h(
-        "div",
-        { class: "flex items-center gap-1" },
-        [
-          currentUser.value
-            ? h(UButton, {
-                size: "sm",
-                color: "success",
-                variant: hasVoted ? "solid" : "ghost",
-                icon: hasVoted ? "i-mdi-check" : "i-mdi-thumb-up",
-                onClick: () => toggleVote(estate.url),
-              })
-            : h(UButton, {
-                size: "sm",
-                color: "success",
-                variant: "soft",
-                icon: "i-mdi-account-plus",
-                onClick: () => promptForUser("Please identify yourself first"),
-              }),
-          h(UButton, {
-            size: "sm",
-            color: "neutral",
-            variant: "ghost",
-            icon: "i-mdi-note-text",
-            onClick: () => openNotesModal(estate),
-          }),
-          h(UButton, {
-            size: "sm",
-            color: "info",
-            variant: "ghost",
-            icon: "i-mdi-link-variant",
-            to: estate.url,
-            target: "_blank",
-          }),
-          h(UButton, {
-            icon: "i-mdi-trash-can",
-            size: "sm",
-            color: "error",
-            variant: "ghost",
-            onClick: () => confirmDeleteEstate(estate),
-          }),
-        ].filter(Boolean),
-      );
-    },
-  },
-];
-
 onMounted(() => {
   if (currentUser.value) {
     return;
@@ -239,13 +134,17 @@ onMounted(() => {
 
     <UContainer
       v-if="hasEstates && viewMode === 'table'"
-      class="bg-default border-default max-w-8xl overflow-clip rounded-2xl border shadow-2xl"
+      class="bg-default border-muted max-w-8xl overflow-clip rounded-2xl border shadow-2xl"
     >
-      <UTable
-        :columns="columns"
-        :data="estatesSortedByVotes"
-        v-model:column-pinning="columnPinning"
-        row-key="url"
+      <EstatesComparisonTable
+        :estates="estatesSortedByVotes"
+        :current-user="currentUser"
+        :get-votes-for-estate="getVotesForEstate"
+        :get-notes-for-estate="getNotesForEstate"
+        :has-user-voted-for-estate="hasUserVotedForEstate"
+        @vote="toggleVote"
+        @view-notes="openNotesModal"
+        @delete="confirmDeleteEstate"
       />
     </UContainer>
 
