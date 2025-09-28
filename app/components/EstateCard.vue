@@ -42,7 +42,7 @@
         <h3 class="mb-2 line-clamp-2 text-lg font-semibold">
           {{ estate.name }}
         </h3>
-        <p class="text-muted-foreground line-clamp-2 text-sm">
+        <p class="text-muted line-clamp-2 text-sm">
           {{ estate.location }}
         </p>
       </div>
@@ -55,7 +55,7 @@
     <template #footer>
       <!-- Voters list -->
       <div v-if="votes.length > 0">
-        <p class="text-muted-foreground mb-2 text-xs">Voted by:</p>
+        <p class="text-muted mb-2 text-xs">Voted by:</p>
         <div class="flex flex-wrap gap-1">
           <span
             v-for="vote in votes"
@@ -74,7 +74,7 @@
 
       <!-- Notes preview -->
       <div v-if="notes.length > 0">
-        <p class="text-muted-foreground mb-1 text-xs">Notes:</p>
+        <p class="text-muted mb-1 text-xs">Notes:</p>
         <p class="text-muted line-clamp-2 text-xs">
           {{
             notes

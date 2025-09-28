@@ -4,7 +4,7 @@
       <UCard>
         <template #header>
           <h3 class="text-lg font-semibold">Notes</h3>
-          <p v-if="estate" class="text-muted-foreground text-sm">
+          <p v-if="estate" class="text-muted text-sm">
             {{ estate.name }}
           </p>
         </template>
@@ -27,7 +27,7 @@
                     <span class="text-sm font-medium">{{
                       note.voterName
                     }}</span>
-                    <span class="text-muted-foreground text-xs">
+                    <span class="text-muted text-xs">
                       {{ new Date(note.timestamp).toLocaleDateString() }}
                     </span>
                   </div>
@@ -44,10 +44,7 @@
               </div>
             </div>
 
-            <div
-              v-if="notes.length === 0"
-              class="text-muted-foreground py-4 text-center"
-            >
+            <div v-if="notes.length === 0" class="text-muted py-4 text-center">
               <Icon
                 name="i-mdi-note-off"
                 class="mx-auto mb-2 h-8 w-8 opacity-50"
@@ -72,7 +69,7 @@
               @keyup.ctrl.enter="$emit('add-note')"
             />
             <div class="flex items-center justify-between">
-              <span class="text-muted-foreground text-xs">
+              <span class="text-muted text-xs">
                 {{ newNote.length }}/{{ maxLength }} characters
               </span>
               <UButton

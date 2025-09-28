@@ -14,7 +14,7 @@
 
           <div v-if="estate" class="bg-muted rounded-lg p-3">
             <p class="text-sm font-medium">{{ estate.name }}</p>
-            <p class="text-muted-foreground text-xs">{{ estate.location }}</p>
+            <p class="text-muted text-xs">{{ estate.location }}</p>
           </div>
 
           <div class="flex justify-end gap-2">

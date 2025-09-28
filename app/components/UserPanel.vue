@@ -9,13 +9,13 @@
         </div>
         <div>
           <p class="font-medium">{{ currentUser }}</p>
-          <p class="text-muted-foreground text-xs">
+          <p class="text-muted text-xs">
             You've voted for {{ userVotesCount }} properties
           </p>
         </div>
       </div>
 
-      <div class="flex items-center gap-8">
+      <div class="flex items-center gap-4 sm:gap-8">
         <div v-if="allParticipants.length > 1" class="text-right">
           <p class="text-sm font-medium">
             {{ allParticipants.length }} participants
@@ -41,6 +41,15 @@
             </span>
           </div>
         </div>
+
+        <UButton
+          to="/profile"
+          color="primary"
+          variant="subtle"
+          size="lg"
+          icon="i-mdi-account-circle"
+          label="Profile"
+        />
 
         <UButton
           @click="$emit('edit-user')"

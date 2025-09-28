@@ -11,11 +11,11 @@
         </template>
 
         <div class="space-y-4">
-          <p class="text-muted-foreground text-sm">
+          <p class="text-muted text-sm">
             {{
               participants.length > 0
-                ? 'Choose your name from the list or add yourself:'
-                : 'Enter your name to start voting on properties:'
+                ? "Choose your name from the list or add yourself:"
+                : "Enter your name to start voting on properties:"
             }}
           </p>
 
@@ -38,7 +38,7 @@
 
           <div class="space-y-2">
             <p class="text-sm font-medium">
-              {{ participants.length > 0 ? 'Or add yourself:' : 'Your name:' }}
+              {{ participants.length > 0 ? "Or add yourself:" : "Your name:" }}
             </p>
             <UInput
               :model-value="name"
@@ -78,9 +78,9 @@ defineProps<{
 }>();
 
 defineEmits<{
-  'update:modelValue': [boolean];
-  'update:name': [string];
-  'select-participant': [string];
+  "update:modelValue": [boolean];
+  "update:name": [string];
+  "select-participant": [string];
   confirm: [];
 }>();
 </script>

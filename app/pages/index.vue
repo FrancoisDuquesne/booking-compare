@@ -124,7 +124,7 @@ const columns: TableColumn<Estate>[] = [
           { class: "text-lg font-bold text-primary" },
           estateVotes.length.toString(),
         ),
-        h("span", { class: "text-xs text-muted-foreground" }, "votes"),
+        h("span", { class: "text-xs text-muted" }, "votes"),
       ]);
     },
   },
@@ -139,7 +139,7 @@ const columns: TableColumn<Estate>[] = [
           { class: "text-lg font-bold text-blue-600" },
           estateNotes.length.toString(),
         ),
-        h("span", { class: "text-xs text-muted-foreground" }, "notes"),
+        h("span", { class: "text-xs text-muted" }, "notes"),
       ]);
     },
   },
@@ -239,7 +239,7 @@ onMounted(() => {
 
     <UContainer
       v-if="hasEstates && viewMode === 'table'"
-      class="bg-default border-muted max-w-8xl overflow-clip rounded-2xl border shadow-2xl"
+      class="bg-default border-default max-w-8xl overflow-clip rounded-2xl border shadow-2xl"
     >
       <UTable
         :columns="columns"
