@@ -1,7 +1,7 @@
 <template>
   <UCard
     :ui="{
-      root: 'h-full flex flex-col overflow-hidden transition-shadow shadow-lg hover:shadow-2xl',
+      root: 'h-full flex flex-col overflow-hidden transition-all shadow-lg hover:shadow-2xl hover:-translate-y-1 duration-200',
       header: '!p-0',
       body: 'grow',
       footer: 'space-y-2',
@@ -15,18 +15,25 @@
           class="h-48 w-full object-cover"
           loading="lazy"
         />
-        <div
-          class="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 backdrop-blur-sm"
-        >
-          <Icon name="i-mdi-star" class="h-4 w-4 text-yellow-500" />
-          <span class="text-sm font-medium">{{ estate.rating }}</span>
-        </div>
-        <div
-          class="bg-primary/90 absolute top-2 left-2 flex items-center gap-1 rounded-full px-3 py-1 text-white backdrop-blur-sm"
-        >
-          <Icon name="i-mdi-thumb-up" class="h-4 w-4" />
-          <span class="text-sm font-bold">{{ votes.length }}</span>
-        </div>
+        <UBadge
+          color="primary"
+          :label="votes.length"
+          icon="i-mdi-thumb-up"
+          size="lg"
+          :ui="{
+            base: 'absolute text-white top-2 left-2',
+          }"
+        />
+        <UBadge
+          color="neutral"
+          :label="estate.rating"
+          icon="i-mdi-star"
+          size="lg"
+          :ui="{
+            base: 'absolute top-2 right-2',
+            leadingIcon: 'text-warning',
+          }"
+        />
       </div>
     </template>
 

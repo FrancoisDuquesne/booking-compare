@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-8">
         <div v-if="allParticipants.length > 1" class="text-right">
           <p class="text-sm font-medium">
             {{ allParticipants.length }} participants
@@ -28,14 +28,14 @@
                 'rounded-full px-2 py-1 text-xs',
                 participant === currentUser
                   ? 'bg-primary text-white'
-                  : 'bg-gray-200 text-gray-700',
+                  : 'bg-muted',
               ]"
             >
               {{ participant }}
             </span>
             <span
               v-if="allParticipants.length > 3"
-              class="rounded-full bg-gray-200 px-2 py-1 text-xs text-gray-700"
+              class="bg-muted rounded-full px-2 py-1 text-xs"
             >
               +{{ allParticipants.length - 3 }}
             </span>
@@ -45,8 +45,8 @@
         <UButton
           @click="$emit('edit-user')"
           color="neutral"
-          variant="ghost"
-          size="sm"
+          variant="subtle"
+          size="lg"
           icon="i-mdi-account-edit"
         />
       </div>
