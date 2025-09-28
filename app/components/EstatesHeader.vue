@@ -14,7 +14,7 @@
         @click="$emit('share')"
       />
 
-      <UButtonGroup size="sm" orientation="horizontal">
+      <UFieldGroup size="sm" orientation="horizontal">
         <UButton
           :color="viewMode === 'grid' ? 'primary' : 'primary'"
           :variant="viewMode === 'grid' ? 'solid' : 'outline'"
@@ -27,7 +27,7 @@
           icon="i-mdi-table"
           @click="$emit('update:viewMode', 'table')"
         />
-      </UButtonGroup>
+      </UFieldGroup>
     </div>
   </div>
 </template>
@@ -35,13 +35,13 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    viewMode: 'grid' | 'table';
+    viewMode: "grid" | "table";
     title?: string;
   }>(),
   {
-    title: 'Booking.com & Airbnb Comparison',
+    title: "Booking.com & Airbnb Comparison",
   },
 );
 
-defineEmits<{ share: []; 'update:viewMode': ['grid' | 'table'] }>();
+defineEmits<{ share: []; "update:viewMode": ["grid" | "table"] }>();
 </script>
