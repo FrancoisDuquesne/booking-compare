@@ -4,17 +4,18 @@
   >
     <h1 class="text-2xl font-bold">{{ title }}</h1>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 self-end">
+      <UColorModeButton />
       <UButton
         color="primary"
         variant="outline"
-        size="sm"
+        size="lg"
         icon="i-mdi-share-variant"
         label="Share"
         @click="$emit('share')"
       />
 
-      <UFieldGroup size="sm" orientation="horizontal">
+      <UFieldGroup size="lg" orientation="horizontal">
         <UButton
           :color="viewMode === 'grid' ? 'primary' : 'primary'"
           :variant="viewMode === 'grid' ? 'solid' : 'outline'"
